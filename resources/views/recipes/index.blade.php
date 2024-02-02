@@ -1,9 +1,18 @@
 <x-layout>
     <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-            <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8 mt-16">
+            <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8 mt-16 bg-[url('/images/hero-1.jpg')]">
                 <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Ghibli Recipes</h2>
                 <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">Repository of animated goodeness.</p>
+                <form method="GET" action="/">
+                    <input
+                        type="text"
+                        name="search"
+                        placeholder="Search something"
+                        class="bg-white placeholder-gray font-semibold text-sm mt-4 border-2 border-black rounded py-2 px-4"
+                        value="{{ request('search') }}"
+                    >
+                </form>
             </div>
             <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-3 lg:py-16 lg:px-6 content-start" style="align-items: start;">
                 <div id="content-wrapper" class="col-span-3 grid gap-8 lg:grid-cols-2 border-4 border-dashed rounded-lg p-4 border-black">
@@ -26,7 +35,7 @@
                                             Jese Leos
                                         </span>
                                     </div>
-                                    <a href="#" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
+                                    <a href="/recipes/{{ $recipe->id }}" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
                                         Read more
                                         <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                                     </a>
@@ -37,6 +46,9 @@
                         <p class="text-center">No posts yet. Please check back later.</p>
                     @endif
                 </div>
+            </div>
+            <div class="px-6">
+                {{ $recipes->links() }}
             </div>
         </div>
     </section>
