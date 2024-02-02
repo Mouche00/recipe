@@ -4,8 +4,8 @@
             <div class="rounded-t-lg md:rounded-l-lg bg-black md:w-[50px] flex justify-center items-center">
                 <p class="text-white text-3xl md:rotate-[-90deg]">Recipe</p>
             </div>
-            <div class="md:w-[50%] ">
-                <img src="/images/hero-1.jpg" alt="mountains" class="md:h-full overflow-hidden rounded-b-none">
+            <div class="md:w-[50%] overflow-hidden bg-[url('{{ asset($recipe->picture) }}')] bg-cover bg-center">
+{{--                <img src="/images/hero-1.jpg" alt="mountains" class="md:h-full rounded-b-none">--}}
             </div>
             <div class="px-4 py-2 mt-2 md:w-[50%]">
                 <h2 class="font-bold text-4xl text-gray-800 tracking-normal">{{ $recipe->title }}</h2>

@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [RecipeController::class, 'index'])->name('recipes.index');
-Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index');
+Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
+Route::post('/recipes/create', [RecipeController::class, 'store'])->name('recipes.store');
+Route::get('/recipes/{recipe}/edit', [RecipeController::class, 'edit'])->name('recipes.edit');
+Route::patch('/recipes/{recipe}/edit', [RecipeController::class, 'update'])->name('recipes.edit');
+Route::delete('/recipes/{recipe}/delete', [RecipeController::class, 'destroy'])->name('recipes.delete');
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
 
 

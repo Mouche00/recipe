@@ -22,7 +22,7 @@ class RecipeController extends Controller
      */
     public function create()
     {
-        //
+        return view('recipes.create');
     }
 
     /**
@@ -30,7 +30,20 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = request()->validate([
+            'title' => 'required',
+            'excerpt' => 'required',
+            'body' => 'required',
+            'picture' => 'required|image'
+        ]);
+
+        $attributes['picture'] = request()->file('picture')->store('public/uploads');
+
+        $attributes['picture'] = str_replace('public', 'storage', $attributes['picture']);
+
+        Recipe::create($attributes);
+
+        return redirect('/');
     }
 
     /**
@@ -46,24 +59,42 @@ class RecipeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Recipe $recipe)
     {
-        //
+        return view('recipes.edit', [
+            'recipe' => $recipe
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Recipe $recipe)
     {
-        //
+        $attributes = request()->validate([
+            'title' => 'required',
+            'excerpt' => 'required',
+            'body' => 'required',
+            'picture' => 'required|image'
+        ]);
+
+        if ($attributes['picture'] ?? false) {
+            $attributes['picture'] = request()->file('picture')->store('public/uploads');
+            $attributes['picture'] = str_replace('public', 'storage', $attributes['picture']);
+        }
+
+        $recipe->update($attributes);
+
+        return redirect('/')->with('success', 'Post Updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Recipe $recipe)
     {
-        //
+        $recipe->delete();
+
+        return redirect('/')->with('success', 'Post Deleted!');
     }
 }

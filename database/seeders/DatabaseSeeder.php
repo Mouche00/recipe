@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
-         Recipe::factory(10)->create();
+        Recipe::factory(10)->create();
     }
 }
